@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>宿一覧</title>
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+    <ul>
+        <li><a href="/">全宿一覧</a></li>
+        <li th:each="c:${bfList}"><a th:text="${c.bfCategory}" th:href="@{/(bfCategoryId = ${c.id})}"></a></li>
+    </ul>
+    <ul>
+        <li th:each="l:${lodgings}">
+            <div>
+                <div>
+                    <img th:src="|/img/${l.img}|" alt="">
+                </div>
+                <p th:text="${l.lodgingName}"></p>
+                <p th:text="${l.bfCategory.bfCategory}"></p>
+            </div>
+            <div>
+                <a href="/">詳細</a>
+            </div>
+        </li>
+    </ul>
+</body>
+<footer>
+フッター
+</footer>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>宿一覧</title>
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+	<th:block th:if="${eL != null}">
+        <form action="/admin/lodging/edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:value="${eL.id}" name="id">
+    </th:block>
+    <th:block th:if="${eL == null}">
+        <form action="/admin/lodging/new" method="post" enctype="multipart/form-data">
+    </th:block>
+        <input type="text" name="lodgingName" th:value="${eL != null ? eL.lodgingName : ''}">
+        <select name="bfCategoryId">
+            <option value="">朝ごはんの種類を選択してください</option>
+            <option th:each="c : ${bfList}" th:value="${c.id}" th:text="${c.bfCategory}" th:selected="${eL != null} ? (${c.id} == ${eL.bfCategory.id}) : false"></option>
+        </select>
+        <input type="text" name="address" th:value="${eL != null ? eL.address : ''}">
+        <input type="time" name="checkIn" th:value="${eL != null ? eL.checkIn : ''}">
+        <input type="time" name="checkOut" th:value="${eL != null ? eL.checkOut : ''}">
+        <input type="file" name="img">
+        <button th:text="${eL != null ? '更新' : '登録'}"></button>
+    </form>
+</body>
+<footer>
+フッター
+</footer>
+</html>
